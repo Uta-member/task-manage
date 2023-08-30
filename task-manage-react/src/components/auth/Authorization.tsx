@@ -2,6 +2,8 @@ import { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { usePageNavigate } from "@/hooks/usePageNavigate";
 import { userPool } from "@/common/cognitoInfo";
+import { useUserInfo } from "@/hooks/useUserInfo";
+import { UserId } from "@/class/user";
 
 //#region Types
 type Props = {
@@ -24,6 +26,7 @@ const Authorization = (props: Props) => {
   //#region Hooks
   const { pageNavigate } = usePageNavigate();
   const location = useLocation();
+  const { setUser, userInfoState, logout } = useUserInfo();
   //#endregion
 
   //#region 関数
@@ -31,10 +34,16 @@ const Authorization = (props: Props) => {
     // 認証されていればuserにオブジェクトが入っているはずなので、それを検証する
     const user = userPool.getCurrentUser();
     if (user == null) {
+      logout();
       pageNavigate("/account/login");
       return;
     }
+    const userId = new UserId(await user.getUsername());
+    if (userInfoState === null || userInfoState.id.value !== userId.value) {
+      setUser(userId);
+    }
   };
+
   const handleWindowFocus = () => {
     auth();
   };

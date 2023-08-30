@@ -22,6 +22,10 @@ export enum UserErrorEnum {
 
   // 認証関連
   cognitoUserAuthorizeFailed = 2101,
+
+  // データ取得関連
+  // DBからのユーザ情報取得失敗
+  readUserInfoFailed = 3001,
 }
 
 export const getUserErrCode = (code: UserErrorEnum) => {

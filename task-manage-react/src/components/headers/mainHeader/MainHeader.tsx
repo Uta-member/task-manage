@@ -1,20 +1,23 @@
 import RowDiv from "@/components/layouts/div/RowDiv";
-import { Button, ButtonProps, Typography } from "@mui/joy";
+import {
+  Button,
+  Dropdown,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Typography,
+} from "@mui/joy";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import NotificationIcon from "@mui/icons-material/Notifications";
+import { usePageNavigate } from "@/hooks/usePageNavigate";
+import { useUserInfo } from "@/hooks/useUserInfo";
 
 /**
  * アプリのメインのヘッダー
  * @returns
  */
 const MainHeader = () => {
-  const iconButtonProps: ButtonProps = {
-    size: "sm",
-    variant: "outlined",
-    sx: {
-      borderColor: "neutral.outlinedBorder",
-    },
-  };
+  const { handlePageNavigate } = usePageNavigate();
+  const { userInfoState, logout } = useUserInfo();
 
   return (
     <RowDiv
@@ -24,10 +27,7 @@ const MainHeader = () => {
       borderColor={"divider"}
     >
       <RowDiv xs={6} gap={"10px"} paddingX={"10px"}>
-        <Button
-          variant="plain"
-          startDecorator={<img src={"/green.png"} height={"35px"} />}
-        >
+        <Button variant="plain" onClick={handlePageNavigate("/app/")}>
           <Typography component={"h1"} fontWeight={600}>
             タスク管理システム
           </Typography>
@@ -40,12 +40,16 @@ const MainHeader = () => {
         gap={"10px"}
         paddingX={"10px"}
       >
-        <Button {...iconButtonProps} startDecorator={<AccountCircle />}>
-          〇〇さん
-        </Button>
-        <Button {...iconButtonProps} startDecorator={<NotificationIcon />}>
-          通知
-        </Button>
+        <Dropdown>
+          <MenuButton startDecorator={<AccountCircle />}>
+            {userInfoState
+              ? `${userInfoState.name.value}さん`
+              : "ユーザ情報なし"}
+          </MenuButton>
+          <Menu>
+            <MenuItem onClick={logout}>ログアウト</MenuItem>
+          </Menu>
+        </Dropdown>
       </RowDiv>
     </RowDiv>
   );
