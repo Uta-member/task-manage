@@ -1,7 +1,7 @@
 import ColumnDiv from "@/components/layouts/div/ColumnDiv";
-import { Divider, List, ListItem } from "@mui/joy";
+import { Divider, List, ListItemButton } from "@mui/joy";
 import ProjectList from "./ProjectList";
-import GroupList from "./GroupList";
+import GroupList from "./groupList/GroupList";
 
 const MainSideNav = () => {
   return (
@@ -19,8 +19,8 @@ const MainSideNav = () => {
           alignItems: "start",
         }}
       >
-        <ListItem>自分のタスク</ListItem>
-        <ListItem>通知</ListItem>
+        <ListItemButton>自分のタスク</ListItemButton>
+        <ListItemButton>通知</ListItemButton>
       </List>
 
       <Divider />

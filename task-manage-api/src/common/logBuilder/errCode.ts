@@ -38,6 +38,10 @@ export enum GroupErrorEnum {
   // データ取得関連
   // 所属グループ一覧取得失敗
   readGroupListFailed = 3001,
+
+  // データ作成関連
+  // グループ作成失敗
+  createGroupFailed = 3101,
 }
 
 export const getGroupErrCode = (code: GroupErrorEnum) => {
