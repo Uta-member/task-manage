@@ -80,11 +80,12 @@ const LoginPage = () => {
       },
       // 失敗時
       onFailure: (err) => {
+        logout();
+        resetField("password");
         if (err instanceof Error) {
           handleRegisterError(err, userId);
         } else {
           setErrMessageState("ログインに失敗しました");
-          resetField("password");
         }
       },
     });
