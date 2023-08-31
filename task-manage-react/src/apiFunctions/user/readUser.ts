@@ -1,7 +1,7 @@
 import { Email, User, UserId, UserName } from "@/class/user";
 import {
-  ReadUserReq,
-  ReadUserRes,
+  ReadUserHttpReq,
+  ReadUserHttpRes,
   readUserHttpChannel,
 } from "./scheme/readUser";
 import { server } from "@/common/api";
@@ -15,11 +15,14 @@ import { ResponseBase } from "@/types/responseBase";
 export const readUser = async (
   userId: UserId
 ): Promise<ResponseBase & { user?: User }> => {
-  const reqData: ReadUserReq = {
+  const reqData: ReadUserHttpReq = {
     userId: userId.value,
   };
 
-  const result = await server.post<ReadUserRes>(readUserHttpChannel, reqData);
+  const result = await server.post<ReadUserHttpRes>(
+    readUserHttpChannel,
+    reqData
+  );
 
   const resData = result.data;
   if (!resData.isSuccess || resData.userInfo === undefined) {

@@ -1,7 +1,7 @@
 import { UserId } from "@/class/user";
 import {
-  AuthorizeUserReq,
-  AuthorizeUserRes,
+  AuthorizeUserHttpReq,
+  AuthorizeUserHttpRes,
   authorizeUserHttpChannel,
 } from "./scheme/authorizeUser";
 import { server } from "@/common/api";
@@ -11,12 +11,12 @@ export const authorizeUser = async (req: {
   verificationCode: string;
 }) => {
   const { userId, verificationCode } = req;
-  const reqData: AuthorizeUserReq = {
+  const reqData: AuthorizeUserHttpReq = {
     userId: userId.value,
     verificationCode,
   };
 
-  const result = await server.post<AuthorizeUserRes>(
+  const result = await server.post<AuthorizeUserHttpRes>(
     authorizeUserHttpChannel,
     reqData
   );

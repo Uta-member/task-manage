@@ -3,7 +3,7 @@ import { ResponseBase } from "@/types/responseBase";
 
 export const authorizeUserHttpChannel = "/user/authorize";
 
-export type AuthorizeUserReq = {
+export type AuthorizeUserHttpReq = {
   userId: UserIdType;
   verificationCode: string;
 };

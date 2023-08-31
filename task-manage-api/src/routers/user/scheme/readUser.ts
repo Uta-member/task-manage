@@ -3,10 +3,10 @@ import { ResponseBase } from "@/types/responseBase";
 
 export const readUserHttpChannel = "/user/read";
 
-export type ReadUserReq = {
+export type ReadUserHttpReq = {
   userId: UserIdType;
 };
 
-export type ReadUserRes = ResponseBase & {
+export type ReadUserHttpRes = ResponseBase & {
   userInfo?: UserType;
 };

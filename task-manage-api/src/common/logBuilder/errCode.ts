@@ -31,3 +31,15 @@ export enum UserErrorEnum {
 export const getUserErrCode = (code: UserErrorEnum) => {
   return `${USER_ERROR_INITIAL}${code}`;
 };
+
+const GROUP_ERROR_INITIAL = "GR";
+
+export enum GroupErrorEnum {
+  // データ取得関連
+  // 所属グループ一覧取得失敗
+  readGroupListFailed = 3001,
+}
+
+export const getGroupErrCode = (code: GroupErrorEnum) => {
+  return `${GROUP_ERROR_INITIAL}${code}`;
+};

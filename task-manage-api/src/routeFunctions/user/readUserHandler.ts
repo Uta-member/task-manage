@@ -2,12 +2,15 @@ import { User, UserId } from "@/class/user";
 import { UserErrorEnum, getUserErrCode } from "@/common/logBuilder/errCode";
 import { writeLog } from "@/common/logBuilder/logBuilder";
 import { readUser } from "@/functions/user/readUser";
-import { ReadUserReq, ReadUserRes } from "@/routers/user/scheme/readUser";
+import {
+  ReadUserHttpReq,
+  ReadUserHttpRes,
+} from "@/routers/user/scheme/readUser";
 import { Request, Response } from "express";
 
 export const readUserHandler = async (req: Request, res: Response) => {
   try {
-    const reqBody: ReadUserReq = req.body;
+    const reqBody: ReadUserHttpReq = req.body;
 
     let userId: UserId = null!;
     try {
@@ -54,7 +57,7 @@ export const readUserHandler = async (req: Request, res: Response) => {
       throw new Error("ユーザ情報の取得に失敗しました");
     }
 
-    const resData: ReadUserRes = {
+    const resData: ReadUserHttpRes = {
       isSuccess: true,
       userInfo: {
         id: user.id.value,
@@ -75,7 +78,7 @@ export const readUserHandler = async (req: Request, res: Response) => {
       message = err.message;
     }
 
-    const resData: ReadUserRes = {
+    const resData: ReadUserHttpRes = {
       isSuccess: false,
       err: {
         errMessage: message,

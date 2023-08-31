@@ -3,14 +3,14 @@ import { getUserErrCode, UserErrorEnum } from "@/common/logBuilder/errCode";
 import { writeLog } from "@/common/logBuilder/logBuilder";
 import { authorizeUser } from "@/functions/user/authorizeUser";
 import {
-  AuthorizeUserReq,
+  AuthorizeUserHttpReq,
   AuthorizeUserRes,
 } from "@/routers/user/scheme/authorizeUser";
 import { Request, Response } from "express";
 
 export const authorizeUserHandler = async (req: Request, res: Response) => {
   try {
-    const reqBody: AuthorizeUserReq = req.body;
+    const reqBody: AuthorizeUserHttpReq = req.body;
     const { userId, verificationCode } = reqBody;
 
     writeLog({

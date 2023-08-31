@@ -1,10 +1,10 @@
 import Authorization from "@/components/auth/Authorization";
 import MainFrame from "@/components/frames/mainFrame/MainFrame";
 import RouteNotFoundPage from "@/pages/errorHandlePages/routeNotFoundPage/RouteNotFoundPage";
-import TopPage from "@/pages/appPages/topPage/TopPage";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AccountRouter from "./AccountRouter";
 import IndexPage from "@/pages/indexPage/IndexPage";
+import AppRouter from "./AppRouter";
 
 /**
  * ルータの起点
@@ -16,18 +16,16 @@ const MainRouter = () => {
       <Routes>
         <Route path={"/"} element={<IndexPage />} />
         <Route
-          path="app/"
+          path="app/*"
           element={
             <Authorization>
               <MainFrame>
-                <Outlet />
+                <AppRouter />
               </MainFrame>
             </Authorization>
           }
-        >
-          <Route index element={<TopPage />} />
-        </Route>
-        <Route path={"account/*"} element={<AccountRouter />}></Route>
+        />
+        <Route path={"account/*"} element={<AccountRouter />} />
         <Route path="*" element={<RouteNotFoundPage />} />
       </Routes>
     </BrowserRouter>
