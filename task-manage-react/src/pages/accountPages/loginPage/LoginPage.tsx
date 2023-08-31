@@ -45,7 +45,6 @@ const LoginPage = () => {
       pageNavigate(`/account/auth/${userId.value}`);
     } else {
       setErrMessageState("ログインに失敗しました");
-      resetField("password");
     }
   };
 
