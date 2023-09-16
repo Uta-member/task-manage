@@ -22,7 +22,7 @@ const GroupRegisterDialog = (props: Props) => {
 
   const [errMessageState, setErrMessageState] = useState<string>("");
 
-  const { control, handleSubmit } = useForm<CreateGroupInputs>({
+  const { control, handleSubmit, reset } = useForm<CreateGroupInputs>({
     defaultValues: {
       groupName: "",
     },
@@ -49,6 +49,7 @@ const GroupRegisterDialog = (props: Props) => {
       if (!result.data.isSuccess) {
         throw new Error("グループ作成に失敗しました");
       }
+      reset();
       setLatestGroupList();
       handleClose();
     } catch (err) {
