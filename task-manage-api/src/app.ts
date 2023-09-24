@@ -1,8 +1,10 @@
+import "reflect-metadata";
 import cors from "cors";
 import express from "express";
 import { createServer } from "http";
 //import socketio from "socket.io";
 import { config } from "dotenv";
+import "./toolkit/inversify/container/inversify.config";
 import router from "./presentation/restApi/routers/mainRouter";
 
 config();

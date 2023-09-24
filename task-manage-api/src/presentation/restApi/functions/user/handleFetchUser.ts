@@ -1,9 +1,9 @@
-import { IUserQueryService } from "@/application/user/userApplicationQueryService";
+import { IUserQueryService } from "@/application/user/userQueryService";
 import { User } from "@/domain/entity/user";
 import { Email, EmailType } from "@/domain/valueObject/email";
 import { UserId, UserIdType } from "@/domain/valueObject/userId";
 import { UserNameType } from "@/domain/valueObject/userName";
-import { container } from "@/toolkit/inversify/container/mainContainer";
+import { container } from "@/toolkit/inversify/container/inversify.config";
 import { TYPES } from "@/toolkit/inversify/types/mainTypes";
 import { logger } from "@/toolkit/logger/logging";
 import { Request, Response } from "express";
@@ -14,7 +14,7 @@ type FetchUserReqDTO = {
 };
 
 type FetchUserResDTO = {
-  user: {
+  user?: {
     id: UserIdType;
     name: UserNameType;
     email: EmailType;
@@ -44,7 +44,7 @@ export const handleFetchUser = async (req: Request, res: Response) => {
     }
 
     if (user === null) {
-      res.status(500).send();
+      res.status(200).send({ user: undefined });
       return;
     }
 

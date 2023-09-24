@@ -5,7 +5,7 @@ import { UserRepository } from "@/infrastructure/orm/typeOrm/repository/pg/userR
 import {
   IUserQueryService,
   UserQueryService,
-} from "@/application/user/userApplicationQueryService";
+} from "@/application/user/userQueryService";
 
 export const bindUserContainer = (container: Container) => {
   container
