@@ -14,11 +14,11 @@ type FetchUserReqDTO = {
 };
 
 type FetchUserResDTO = {
-  user?: {
+  user: {
     id: UserIdType;
     name: UserNameType;
     email: EmailType;
-  };
+  } | null;
 };
 
 export const fetchUserHttpChannel = "/fetch_user";
@@ -44,7 +44,8 @@ export const handleFetchUser = async (req: Request, res: Response) => {
     }
 
     if (user === null) {
-      res.status(200).send({ user: undefined });
+      const resData: FetchUserResDTO = { user: null };
+      res.status(200).send(resData);
       return;
     }
 
